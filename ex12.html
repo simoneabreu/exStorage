@@ -34,7 +34,7 @@
             loadFromLocalStorage();
         }
 
-        function loadFromLocalStorage() {
+        function carregarparaLocalStorage() {
             var itemListArray = localStorage.getItem("nome","telefone");
 			
             
@@ -56,7 +56,7 @@
             }
         }
 
-        function saveToLocalStorage(item) {
+        function salvarnoLocalStorage(item) {
             var contatoArray = localStorage.getItem("nome");
 			var contatoArray = localStorage.getItem("telefone");
 			
@@ -81,6 +81,7 @@
             var textInput = document.getElementById("nome");
 			
 			
+			
             var itemDigitado = textInput.value;
 		
 
@@ -99,7 +100,7 @@
                 ul.appendChild(li);
 
                
-                saveToLocalStorage(itemDigitado);
+                salvarnoLocalStorage(itemDigitado);
             }
 
         }
