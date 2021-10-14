@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>lista telefonica</title>
+
+</head>
+<body>
+<div class="content">
+<h2>Lista telefonica</h2>
+<div class="input-button">
+<div class="mdl-textfield mdl-js-textfield">
+<input type="text" id= "nome" placeholder="nome"/>
+<input type="text" id= "telefone" placeholder="telefone"/>
+<input type="button" id="Adicionar" value="Adicionar">
+</div>
+ <ul id="listaItens">
+  </ul>
+
+</div>
+ 
+<div class="list">
+<ul></ul>
+</div>
+</div>
+<script>
+
+
+        window.onload = init;
+
+        function init() {
+            var botao = document.getElementById("Adicionar");
+            botao.onclick = handlerClickButton;
+            loadFromLocalStorage();
+        }
+
+        function loadFromLocalStorage() {
+            var itemListArray = localStorage.getItem("nome");
+            
+            if (itemListArray != null) {
+          
+                itemListArray = JSON.parse(itemListArray);
+                
+                var ul = document.getElementById("listaItens");
+
+                for (var i = 0; i < itemListArray.length; i++) {
+                    var li = document.createElement("li")
+                    li.innerHTML = itemListArray[i];
+                    console.log(itemListArray[i])
+                    ul.appendChild(li);
+                }
+
+            }else{
+                console.log("lista vazia")
+            }
+        }
+
+        function saveToLocalStorage(item) {
+            var itemListArray = localStorage.getItem("nome");
+            if (itemListArray == null) {
+           
+                itemListArray = [];
+            } else {
+          
+                itemListArray = JSON.parse(itemListArray);
+            }
+
+          
+            itemListArray.push(item);
+
+        
+            localStorage.setItem("nome", JSON.stringify(itemListArray));
+        }
+
+        function handlerClickButton() {
+           
+            var textInput = document.getElementById("nome", "telefone");
+            var itemDigitado = textInput.value;
+
+            textInput.value = ""
+
+            if (itemDigitado == "") {
+                alert("Informe algum dos itens!");
+            } else {
+                
+                var li = document.createElement("li");
+                li.innerHTML = itemDigitado;
+
+               
+                var ul = document.getElementById("listaItens")
+               
+                ul.appendChild(li);
+
+               
+                saveToLocalStorage(itemDigitado);
+            }
+
+        }
+   
+
+</script>
+
+</body>
+
+</html>
