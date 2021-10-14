@@ -17,14 +17,11 @@
 <input type="text" id= "telefone" placeholder="telefone"/>
 <input type="button" id="Adicionar" value="Adicionar">
 </div>
- <ul id="listaItens">
+ <ul id="contato">
   </ul>
 
 </div>
  
-<div class="list">
-<ul></ul>
-</div>
 </div>
 <script>
 
@@ -38,18 +35,19 @@
         }
 
         function loadFromLocalStorage() {
-            var itemListArray = localStorage.getItem("nome");
+            var itemListArray = localStorage.getItem("nome","telefone");
+			
             
             if (itemListArray != null) {
           
-                itemListArray = JSON.parse(itemListArray);
+                contatoArray = JSON.parse(contatoArray);
                 
-                var ul = document.getElementById("listaItens");
+                var ul = document.getElementById("contato");
 
                 for (var i = 0; i < itemListArray.length; i++) {
                     var li = document.createElement("li")
-                    li.innerHTML = itemListArray[i];
-                    console.log(itemListArray[i])
+                    li.innerHTML = contatoArray[i];
+                    console.log(contatoArray[i])
                     ul.appendChild(li);
                 }
 
@@ -59,26 +57,32 @@
         }
 
         function saveToLocalStorage(item) {
-            var itemListArray = localStorage.getItem("nome");
-            if (itemListArray == null) {
+            var contatoArray = localStorage.getItem("nome");
+			var contatoArray = localStorage.getItem("telefone");
+			
+            if (contatoArray == null) {
            
-                itemListArray = [];
+                contatoArray = [];
             } else {
           
-                itemListArray = JSON.parse(itemListArray);
+                contatoArray = JSON.parse(contatoArray);
             }
 
           
-            itemListArray.push(item);
+            contatoArray.push(item);
 
         
-            localStorage.setItem("nome", JSON.stringify(itemListArray));
+            localStorage.setItem("nome","telefone", JSON.stringify(contatoArray));
+			
         }
 
         function handlerClickButton() {
            
-            var textInput = document.getElementById("nome", "telefone");
+            var textInput = document.getElementById("nome");
+			
+			
             var itemDigitado = textInput.value;
+		
 
             textInput.value = ""
 
@@ -90,7 +94,7 @@
                 li.innerHTML = itemDigitado;
 
                
-                var ul = document.getElementById("listaItens")
+                var ul = document.getElementById("contato")
                
                 ul.appendChild(li);
 
